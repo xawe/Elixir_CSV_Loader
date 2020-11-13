@@ -11,7 +11,7 @@ defmodule CsvLoader do
 
   ## Examples
     iex -S mix
-      iex> CsvLoader.load_stream("I:\\Projetos\\Misc\\csvlab\\1.csv")
+      iex> CsvLoader.load_stream("I:\\Projetos\\Misc\\csvlab\\26.csv")
 
   """
   def load_stream file do
@@ -23,5 +23,18 @@ defmodule CsvLoader do
       |> Enum.to_list
     end_time = NaiveDateTime.utc_now
     {:ok, begin_time, end_time, data}
+  end
+
+
+  def load file do
+    begin_time = NaiveDateTime.utc_now
+    data =
+      file
+      |> File.read!
+      |> String.split("\n")
+      |> Enum.to_list
+
+      end_time = NaiveDateTime.utc_now
+      {:ok, begin_time, end_time, data}
   end
 end
